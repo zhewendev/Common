@@ -1,9 +1,11 @@
 package com.baiheng.common.network.utils;
 
 /**
- * Created by zhewen
- * date:2019/8/28
- */
+* author：zhewen
+* description：
+* date： 8/29/2019
+* version：
+*/
 public class Exceptions {
     public static void illegalArgument(String msg, Object... params) {
         throw new IllegalArgumentException(String.format(msg, params));

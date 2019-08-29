@@ -1,27 +1,28 @@
 package com.baiheng.common.network.request;
 
-import android.view.textclassifier.TextLinks;
 
+import com.baiheng.common.network.callback.Callback;
 import com.baiheng.common.network.utils.Exceptions;
 
 import java.util.Map;
 
-import okhttp3.Callback;
 import okhttp3.Headers;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
 /**
- * Created by zhewen
- * date: 2019/8/28
- */
+* author：zhewen
+* description：base class of all Request
+* date： 8/29/2019
+* version：
+*/
 public abstract class OkHttpRequest {
 
     protected String url;
     protected Object tag;
-    protected Map<String, String> params;   //todo
+    protected Map<String, String> params;
     protected Map<String, String> headers;
-    protected int id;   //todo
+    protected int id;
 
     protected Request.Builder builder = new Request.Builder();
 
@@ -47,16 +48,16 @@ public abstract class OkHttpRequest {
         appendHeaders();
     }
 
-    protected abstract RequestBody buildRequestBody();  //todo
+    protected abstract RequestBody buildRequestBody();  //
 
     protected RequestBody wrapRequestBody(RequestBody requestBody, final Callback callback)
     {
         return requestBody;
     }
 
-    protected abstract Request buildRequest(RequestBody requestBody);
+    protected abstract Request buildRequest(RequestBody requestBody);   // Structural RequestBody(the GET method is empty)
 
-    protected RequestCall build() { //todo
+    public RequestCall build() {
         return new RequestCall(this);
     }
 
@@ -67,9 +68,6 @@ public abstract class OkHttpRequest {
         Request request = buildRequest(wrappedRequestBody);
         return request;
     }
-
-
-
 
 
     /**

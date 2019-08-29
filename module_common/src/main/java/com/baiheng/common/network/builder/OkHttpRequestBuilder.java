@@ -1,19 +1,22 @@
 package com.baiheng.common.network.builder;
 
+import com.baiheng.common.network.request.RequestCall;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Created by zhewen
- * date: 2019/8.29
- * @param <T>
- */
+* author：zhewen
+* description：Base class of all Request.Builder
+* date： 8/29/2019
+* version：
+*/
 public abstract class OkHttpRequestBuilder<T extends OkHttpRequestBuilder> {
     protected String url;
     protected Object tag;
     protected Map<String, String> headers;
-    protected Map<String, String> params;   //todo
-    protected int id;   //todo
+    protected Map<String, String> params;   //Custom parameter set added at the end of the url
+    protected int id;
 
     public T id(int id) {
         this.id = id;
@@ -25,7 +28,7 @@ public abstract class OkHttpRequestBuilder<T extends OkHttpRequestBuilder> {
         return (T) this;
     }
 
-    public T Tag(Object tag) {
+    public T tag(Object tag) {
         this.tag = tag;
         return (T) this;
     }
