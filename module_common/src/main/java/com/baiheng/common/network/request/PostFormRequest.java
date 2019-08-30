@@ -25,6 +25,7 @@ import okhttp3.RequestBody;
 * version：
 */
 public class PostFormRequest extends OkHttpRequest {
+
     private List<PostFormBuilder.FileInput> files;
 
     public PostFormRequest(String url, Object tag, Map<String, String> params,
@@ -33,6 +34,10 @@ public class PostFormRequest extends OkHttpRequest {
         this.files = files;
     }
 
+    /**
+     *
+     * @return RequestBody waiting to be submitted
+     */
     @Override
     protected RequestBody buildRequestBody() {
         if (files == null || files.isEmpty()) {
@@ -47,8 +52,9 @@ public class PostFormRequest extends OkHttpRequest {
 
             for (int i = 0; i < files.size(); i++) {
                 PostFormBuilder.FileInput fileInput = files.get(i);
-                RequestBody fileBody = RequestBody.create(MediaType.parse(guessMimeType(fileInput.filename)), fileInput.file);
-                builder.addFormDataPart(fileInput.key, fileInput.filename, fileBody);
+                // Constructs the file RequestBody
+                RequestBody fileBody = RequestBody.create(MediaType.parse(guessMimeType(fileInput.fileName)), fileInput.file);
+                builder.addFormDataPart(fileInput.key, fileInput.fileName, fileBody);
             }
             return builder.build();
         }
@@ -85,6 +91,11 @@ public class PostFormRequest extends OkHttpRequest {
         return builder.post(requestBody).build();
     }
 
+    /**
+     * Determine the data type
+     * @param path
+     * @return
+     */
     private String guessMimeType(String path)
     {
         FileNameMap fileNameMap = URLConnection.getFileNameMap();
@@ -98,13 +109,17 @@ public class PostFormRequest extends OkHttpRequest {
         }
         if (contentTypeFor == null)
         {
-            contentTypeFor = "application/octet-stream";
+            contentTypeFor = "application/octet-stream";    //Binary stream data
         }
         return contentTypeFor;
     }
 
+    /**
+     * add RequestBody data(file in the form of a form)
+     * @param builder
+     */
     private void addParams(MultipartBody.Builder builder) {
-        if (params != null || !params.isEmpty()) {
+        if (params != null && !params.isEmpty()) {
             for (String key : params.keySet()) {
                 builder.addPart(Headers.of("Content-Dispositon", "form-data; name=\"" + key + "\""),
                         RequestBody.create(null, params.get(key)));
@@ -113,11 +128,11 @@ public class PostFormRequest extends OkHttpRequest {
     }
 
     /**
-     *add RequestBody data
+     *add RequestBody data(key pair)
      * @param builder
      */
     private void addParams(FormBody.Builder builder) {
-        if (params != null) {
+        if (params != null && !params.isEmpty()) {
             for (String key : params.keySet()) {
                 builder.add(key, params.get(key));
             }

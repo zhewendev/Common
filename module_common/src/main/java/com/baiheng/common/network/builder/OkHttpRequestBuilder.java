@@ -15,7 +15,7 @@ public abstract class OkHttpRequestBuilder<T extends OkHttpRequestBuilder> {
     protected String url;
     protected Object tag;
     protected Map<String, String> headers;
-    protected Map<String, String> params;   //Custom parameter set added at the end of the url
+    protected Map<String, String> params;   // Data entities to be submitted
     protected int id;
 
     public T id(int id) {

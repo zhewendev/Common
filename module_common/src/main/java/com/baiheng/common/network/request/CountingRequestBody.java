@@ -69,6 +69,12 @@ public class CountingRequestBody extends RequestBody {
             super(delegate);
         }
 
+        /**
+         * exposure upload progress
+         * @param source
+         * @param byteCount
+         * @throws IOException
+         */
         @Override
         public void write(Buffer source, long byteCount) throws IOException
         {
@@ -81,6 +87,11 @@ public class CountingRequestBody extends RequestBody {
     }
 
     public interface Listener {
+        /**
+         * Exposure upload progress
+         * @param bytesWritten the byte size has been upload
+         * @param contentLength total byte size
+         */
         void onRequestProgress(long bytesWritten, long contentLength);
     }
 }

@@ -6,6 +6,7 @@ import com.baiheng.common.network.request.RequestCall;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ import java.util.Map;
 * date： 8/29/2019
 * version：
 */
-public class PostFormBuilder extends OkHttpRequestBuilder implements HasParamsable {
+public class PostFormBuilder extends OkHttpRequestBuilder<PostFormBuilder> implements HasParamsable {
 
     private List<FileInput> files = new ArrayList<>();
 
@@ -25,21 +26,29 @@ public class PostFormBuilder extends OkHttpRequestBuilder implements HasParamsab
     }
 
     public PostFormBuilder files(String key, Map<String, File> files) {
-        for (String filename : files.keySet()) {
-            this.files.add(new FileInput(key, filename, files.get(filename)));
+        for (String fileName : files.keySet()) {
+            this.files.add(new FileInput(key, fileName, files.get(fileName)));
         }
         return this;
     }
 
+    public PostFormBuilder addFile(String key, String fileName, File file) {
+        files.add(new FileInput(key, fileName, file));
+        return this;
+    }
+
+    /**
+     * File in the form of a form
+     */
     public static class FileInput {
         public String key;
-        public String filename;
+        public String fileName;
         public File file;
 
-        public FileInput(String name, String filename, File file)
+        public FileInput(String name, String fileName, File file)
         {
             this.key = name;
-            this.filename = filename;
+            this.fileName = fileName;
             this.file = file;
         }
 
@@ -48,7 +57,7 @@ public class PostFormBuilder extends OkHttpRequestBuilder implements HasParamsab
         {
             return "FileInput{" +
                     "key='" + key + '\'' +
-                    ", filename='" + filename + '\'' +
+                    ", filename='" + fileName + '\'' +
                     ", file=" + file +
                     '}';
         }
@@ -56,11 +65,16 @@ public class PostFormBuilder extends OkHttpRequestBuilder implements HasParamsab
 
     @Override
     public OkHttpRequestBuilder params(Map<String, String> params) {
-        return null;
+        this.params = params;
+        return this;
     }
 
     @Override
     public OkHttpRequestBuilder addParams(String key, String value) {
-        return null;
+        if (this.params == null) {
+            params = new LinkedHashMap<>();
+        }
+        params.put(key, value);
+        return this;
     }
 }

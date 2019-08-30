@@ -71,6 +71,11 @@ public class RequestCall {
         return  call;
     }
 
+    /**
+     * Generate the final Request
+     * @param callback
+     * @return
+     */
     private Request generateRequest(Callback callback) {
         return okHttpRequest.generateRequest(callback);
     }
