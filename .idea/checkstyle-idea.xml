@@ -7,6 +7,7 @@
         <entry key="copy-libs" value="true" />
         <entry key="location-0" value="BUNDLED:(bundled):Sun Checks" />
         <entry key="location-1" value="BUNDLED:(bundled):Google Checks" />
+        <entry key="location-2" value="LOCAL_FILE:E:/vivodoc/static_allocation/checkstyle-6.14.1/vivo_checks.xml:vivo Checks" />
         <entry key="scan-before-checkin" value="false" />
         <entry key="scanscope" value="JavaOnly" />
         <entry key="suppress-errors" value="false" />
