@@ -15,7 +15,7 @@ import okhttp3.Response;
 /**
 * author：zhewen
 * description：
-* date： 8/29/2019
+* date： 4/17/2020
 * version：
 */
 public class OkHttpUtils {
@@ -25,7 +25,7 @@ public class OkHttpUtils {
     private OkHttpClient mOkHttpClient;
     private Platform mPlatform; // todo
 
-    public OkHttpUtils(OkHttpClient okHttpClient) { //todo 为什么不设为private
+    private OkHttpUtils(OkHttpClient okHttpClient) {
         if (okHttpClient == null) {
             mOkHttpClient = new OkHttpClient(); //todo 待定制化
         } else {
