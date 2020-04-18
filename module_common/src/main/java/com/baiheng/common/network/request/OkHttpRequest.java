@@ -1,19 +1,17 @@
 package com.baiheng.common.network.request;
 
+import java.util.Map;
+import java.util.Objects;
+
 import com.baiheng.common.network.callback.Callback;
 import com.baiheng.common.network.utils.Exceptions;
-
-import java.util.Map;
 
 import okhttp3.Headers;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
 /**
- * author：zhewen
- * description：base class of all Request
- * date： 8/29/2019
- * version：
+ * author：zhewen description：base class of all Request date： 4/18/2020 version：
  */
 public abstract class OkHttpRequest {
     
@@ -65,9 +63,8 @@ public abstract class OkHttpRequest {
     public Request generateRequest(Callback callback) {
         
         RequestBody requestBody = buildRequestBody();
-        RequestBody wrappedRequestBody = wrapRequestBody(requestBody, callback);    // encapsulate RequestBody
-        Request request = buildRequest(wrappedRequestBody); // Return to the final Request
-        return request;
+        RequestBody wrappedRequestBody = wrapRequestBody(requestBody, callback); // encapsulate RequestBody
+        return buildRequest(wrappedRequestBody);
     }
     
     /**
@@ -80,13 +77,13 @@ public abstract class OkHttpRequest {
             return;
         }
         for (String key : headers.keySet()) {
-            headersBuilder.add(key, headers.get(key));
+            headersBuilder.add(key, Objects.requireNonNull(headers.get(key)));
         }
         builder.headers(headersBuilder.build());
     }
     
     public int getId() {
-
+        
         return id;
     }
     

@@ -1,18 +1,16 @@
 package com.baiheng.common.network.request;
 
-import com.baiheng.common.network.utils.Exceptions;
-
 import java.util.Map;
+
+import com.baiheng.common.network.utils.Exceptions;
 
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+
 /**
-* author: zhewen
-* description:
-* date: 8/30/2019
-* version:
-*/
+ * author: zhewen description: date: 4/18/2020 version:
+ */
 public class PostStringRequest extends OkHttpRequest {
     
     private static MediaType MEDIA_TYPE_PLAIN = MediaType.parse("text/plain;charset=utf-8");

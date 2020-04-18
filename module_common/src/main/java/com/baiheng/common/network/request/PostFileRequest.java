@@ -1,21 +1,19 @@
 package com.baiheng.common.network.request;
 
+import java.io.File;
+import java.util.Map;
+
 import com.baiheng.common.network.OkHttpUtils;
 import com.baiheng.common.network.callback.Callback;
 import com.baiheng.common.network.utils.Exceptions;
 
-import java.io.File;
-import java.util.Map;
-
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+
 /**
-* author: zhewen
-* description:
-* date: 8/30/2019
-* version:
-*/
+ * author: zhewen description: date: 4/18/2020 version:
+ */
 public class PostFileRequest extends OkHttpRequest {
     
     private static MediaType MEDIA_TYPE_STREAM = MediaType.parse("application/octet-stream");
